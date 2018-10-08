@@ -14,7 +14,7 @@ Build the project
 mvn clean install
 ```
 
-#How to use
+# How to use
 
 1. Build the project
 2. Navigate to the target/ directory and get the jar **wso2-projects-creator-tool.jar**
