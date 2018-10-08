@@ -27,44 +27,57 @@ java -jar wso2-projects-creator-tool.jar
 
 4. Give the answers to the questions prompted by the tool
 
-
-
-            Enter project name. e.g Sample-Project
+            **Enter project name. e.g Sample-Project**
             InvoiceManagement
-            Enter environments with comma separated values. e.g local,aat,sit
+            
+            **Enter environments with comma separated values. e.g local,aat,sit**
             dev,test,ppd,prod   
-            Enter group id. e.g org.test.sample-project
+            
+            **Enter group id. e.g org.test.sample-project**
             org.test.invoicemanagement
-            Do you want to create ESB project. Y/N
+            
+            **Do you want to create ESB project. Y/N**
             y
-            Do you want to create Registry project. Y/N
+            
+            **Do you want to create Registry project. Y/N**
             y
-            Do you want to create custom directories. Y/N
+            
+            **Do you want to create custom directories. Y/N**
             y
-            Enter custom directory paths if needed. e.g xslt, xsd, endpoints/local, endpoints/sit
+            
+            **Enter custom directory paths if needed. e.g xslt, xsd, endpoints/local, endpoints/sit**
             xslt,xsd,endpoints/dev,endpoints/test,endpoints/ppd,endpoints/prod
-            Do you want to create DSS project. Y/N
+            
+            **Do you want to create DSS project. Y/N**
             y
 
 5. Project structure will be created with given information
 
 ```sh
 InvoiceManagement/
+|-- .project
 |-- InvoiceManagementCAPP
+|   |-- .project
 |   `-- pom.xml
 |-- InvoiceManagementCAPP-DEV
+|   |-- .project
 |   `-- pom.xml
 |-- InvoiceManagementCAPP-PPD
+|   |-- .project
 |   `-- pom.xml
 |-- InvoiceManagementCAPP-PROD
+|   |-- .project
 |   `-- pom.xml
 |-- InvoiceManagementCAPP-TEST
+|   |-- .project
 |   `-- pom.xml
 |-- InvoiceManagementDSS
+|   |-- .project
 |   |-- artifact.xml
 |   |-- dataservice
 |   `-- pom.xml
 |-- InvoiceManagementESB
+|   |-- .project
 |   |-- artifact.xml
 |   |-- pom.xml
 |   `-- src
@@ -81,6 +94,7 @@ InvoiceManagement/
 |               |-- tasks
 |               `-- templates
 |-- InvoiceManagementREG
+|   |-- .project
 |   |-- artifact.xml
 |   |-- endpoints
 |   |   |-- dev
@@ -90,4 +104,6 @@ InvoiceManagement/
 |   |-- pom.xml
 |   |-- xsd
 |   `-- xslt
+`-- pom.xml
+
 ```
