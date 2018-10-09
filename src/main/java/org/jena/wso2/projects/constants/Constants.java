@@ -1,3 +1,5 @@
+package org.jena.wso2.projects.constants;
+
 public class Constants {
     public final static String ESB_API_DIR = "/src/main/synapse-config/api";
     public final static String ESB_EP_DIR = "/src/main/synapse-config/endpoints";
@@ -25,4 +27,5 @@ public class Constants {
     public final static String ECLIPSE_PROJECT_XML = ".project";
     public final static String ARTIFACT_XML = "artifact.xml";
     public final static String ARTIFACT_FTL = "artifact.ftl";
+    public final static String TEMPLATES_DIR = "/templates";
 }

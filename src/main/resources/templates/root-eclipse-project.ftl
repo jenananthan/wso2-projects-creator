@@ -1,11 +1,11 @@
 <projectDescription>
-        <name>${pomObject.projectName}</name>
-        <comment></comment>
-        <projects>
-        </projects>
-        <buildSpec>
-        </buildSpec>
-        <natures>
-                <nature>org.wso2.developerstudio.eclipse.mavenmultimodule.project.nature</nature>
-        </natures>
+    <name>${pomObject.projectName}</name>
+    <comment></comment>
+    <projects>
+    </projects>
+    <buildSpec>
+    </buildSpec>
+    <natures>
+        <nature>org.wso2.developerstudio.eclipse.mavenmultimodule.project.nature</nature>
+    </natures>
 </projectDescription>

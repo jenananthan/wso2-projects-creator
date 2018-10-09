@@ -1,9 +1,13 @@
-import freemarker.template.TemplateException;
+package org.jena.wso2.projects;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+
+import freemarker.template.TemplateException;
 
 public class Main {
     public static void main(String[] args) throws IOException, TemplateException {
@@ -29,7 +33,6 @@ public class Main {
         System.out.println("Do you want to create DSS project. Y/N");
         String createDSSProject = scanner.next();
 
-
         String targetProjectName = "";
         List<String> modules = new ArrayList<String>();
 
@@ -50,7 +53,6 @@ public class Main {
             ESBProject esbProject = new ESBProject(targetProjectName, groupId);
             esbProject.create();
         }
-
 
         //Create DSS project
         if ("y".equalsIgnoreCase(createDSSProject)) {

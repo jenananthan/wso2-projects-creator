@@ -1,12 +1,16 @@
-import dto.POM;
-import freemarker.template.TemplateException;
-import org.apache.commons.io.FileUtils;
+package org.jena.wso2.projects;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.io.FileUtils;
+
+import org.jena.wso2.projects.constants.Constants;
+import org.jena.wso2.projects.dto.POM;
+import freemarker.template.TemplateException;
 
 public class RootProject {
     private String projectName;
@@ -50,10 +54,8 @@ public class RootProject {
                 ) {
             FileUtils.moveDirectoryToDirectory(new File(module), targetDir, false);
 
-
         }
 
     }
-
 
 }

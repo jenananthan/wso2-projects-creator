@@ -1,22 +1,20 @@
-import dto.POM;
-import freemarker.template.TemplateException;
+package org.jena.wso2.projects;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CAPPProject {
-    private String projectName;
+import org.jena.wso2.projects.constants.Constants;
+import org.jena.wso2.projects.dto.POM;
+import freemarker.template.TemplateException;
 
+public class CAPPProject extends ArtifactProject {
+    private String projectName;
     private String groupId;
 
-
     public CAPPProject(String projectName, String groupId) {
-        this.projectName = projectName;
-
-        this.groupId = groupId;
-
+        super(projectName, groupId);
     }
 
     public void create() throws IOException, TemplateException {
