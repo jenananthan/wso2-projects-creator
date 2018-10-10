@@ -1,10 +1,10 @@
 package org.jena.wso2.projects.dto;
 
 public class POM {
-    String groupId;
-    String artifactId;
-    String version;
-    String projectName;
+    private String groupId;
+    private String artifactId;
+    private String version;
+    private String projectName;
 
     public String getProjectName() {
         return projectName;

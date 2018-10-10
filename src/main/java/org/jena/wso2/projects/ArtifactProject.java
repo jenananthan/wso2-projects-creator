@@ -19,11 +19,11 @@ public class ArtifactProject {
         this.groupId = groupId;
     }
 
-    void createParentDir() {
+    protected void createParentDir() {
         new File(projectName).mkdir();
     }
 
-    void createPOMAndArtifactXML(String pomTemplate, String artifactTemplate) throws IOException, TemplateException {
+    protected void createPOMAndArtifactXML(String pomTemplate, String artifactTemplate) throws IOException, TemplateException {
         Map<String, Object> input = new HashMap<String, Object>();
         POM pom = new POM();
         pom.setGroupId(groupId);
@@ -36,7 +36,7 @@ public class ArtifactProject {
         TemplateGenerator.generate(input, Constants.ARTIFACT_FTL, projectName + "/" + Constants.ARTIFACT_XML);
     }
 
-    void createDirectoryStructure(String[] dirs) {
+    protected void createDirectoryStructure(String[] dirs) {
         if (dirs != null) {
             for (String dir : dirs) {
                 System.out.println("Reg custom dir : " + dir);
