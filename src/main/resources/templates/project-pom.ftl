@@ -7,6 +7,7 @@
     <version>${pomObject.version}</version>
     <packaging>pom</packaging>
     <name>${pomObject.projectName}</name>
+    <description></description>
     <modules>
     <#list modules as module>
         <module>${module}</module>

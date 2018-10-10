@@ -30,26 +30,25 @@ public class RootProject {
     }
 
     private void createDirectoryStructure() {
-        new File(projectName).mkdir();
+        new File(projectName + Constants.SUFFIX_TEMP).mkdir();
     }
 
     private void createPOM() throws IOException, TemplateException {
         Map<String, Object> input = new HashMap<String, Object>();
         POM pom = new POM();
         pom.setGroupId(groupId);
-        pom.setArtifactId(projectName);
+        pom.setArtifactId(projectName + "-parent");
         pom.setVersion(Constants.PROJECT_VERSION);
         pom.setProjectName(projectName);
         input.put("pomObject", pom);
         input.put("modules", modules);
-        TemplateGenerator.generate(input, Constants.ROOT_PROJECT_POM_FTL, projectName + "/" + Constants.POM_XML);
-        TemplateGenerator.generate(input, Constants.ROOT_ECLIPSE_FILE_FTL, projectName + "/" + Constants.ECLIPSE_PROJECT_XML);
+        TemplateGenerator.generate(input, Constants.ROOT_PROJECT_POM_FTL, projectName + Constants.SUFFIX_TEMP + "/" + Constants.POM_XML);
+        TemplateGenerator.generate(input, Constants.ROOT_ECLIPSE_FILE_FTL, projectName + Constants.SUFFIX_TEMP + "/" + Constants.ECLIPSE_PROJECT_XML);
 
     }
 
     private void moveModules() throws IOException {
         File targetDir = new File(projectName + Constants.SUFFIX_TEMP);
-        targetDir.mkdir();
         for (String module : modules) {
             FileUtils.moveDirectoryToDirectory(new File(module), targetDir, false);
         }

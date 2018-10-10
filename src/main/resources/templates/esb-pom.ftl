@@ -5,8 +5,9 @@
     <groupId>${pomObject.groupId}</groupId>
     <artifactId>${pomObject.artifactId}</artifactId>
     <version>${pomObject.version}</version>
-    <packaging>carbon/application</packaging>
+    <packaging>pom</packaging>
     <name>${pomObject.projectName}</name>
+    <description></description>
     <properties>
         <CApp.type>
             bpel/workflow=zip,lib/registry/filter=jar,webapp/jaxws=war,lib/library/bundle=jar,service/dataservice=dbs,synapse/local-entry=xml,synapse/proxy-service=xml,carbon/application=car,registry/resource=zip,lib/dataservice/validator=jar,synapse/endpoint=xml,web/application=war,lib/carbon/ui=jar,service/axis2=aar,synapse/sequence=xml,synapse/configuration=xml,wso2/gadget=dar,lib/registry/handlers=jar,lib/synapse/mediator=jar,synapse/task=xml,synapse/api=xml,synapse/template=xml,synapse/message-store=xml,synapse/message-processors=xml,synapse/inbound-endpoint=xml

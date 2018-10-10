@@ -1,8 +1,16 @@
 # wso2-projects-creator
 
-This tool will help to create wso2 developer studio ESB, REG , DSS and CAPP project in a minute. 
-1. Create the project structure
-2. Open in developer studio and use
+This tool will help to create wso2 developer studio ESB, REG , DSS and CAPP project as multi maven
+project in a minute.
+
+This tool allows to create environment specific composite apps where environment specific configs
+e.g endpoints and test artifacts can be configured.
+
+Once project structure is created , it can be simply opened in wso2 developer studio (user option import as 
+existing wso2 projects in eclipse) and artifacts can be created as per the requirement.
+
+**Please note that without any artifacts created maven build will fail for projects.**
+
 
 # Development Guide
 ###### Prerequisites
@@ -64,6 +72,8 @@ java -jar wso2-projects-creator-tool.jar
 
 ```sh
 invoice-sync/
+├── pom.xml
+├── .project
 ├── invoice-sync
 │   ├── pom.xml
 │   └── .project

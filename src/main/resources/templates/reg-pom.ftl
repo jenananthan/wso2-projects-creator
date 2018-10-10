@@ -5,8 +5,9 @@
     <groupId>${pomObject.groupId}</groupId>
     <artifactId>${pomObject.artifactId}</artifactId>
     <version>${pomObject.version}</version>
-    <packaging>carbon/application</packaging>
+    <packaging>pom</packaging>
     <name>${pomObject.projectName}</name>
+    <description></description>
     <properties>
         <CApp.type>
             bpel/workflow=zip,lib/registry/filter=jar,webapp/jaxws=war,lib/library/bundle=jar,service/dataservice=dbs,synapse/local-entry=xml,synapse/proxy-service=xml,carbon/application=car,registry/resource=zip,lib/dataservice/validator=jar,synapse/endpoint=xml,web/application=war,lib/carbon/ui=jar,service/axis2=aar,synapse/sequence=xml,event/stream=json,event/publisher=xml,event/receiver=xml,event/execution-plan=siddhiql,synapse/configuration=xml,wso2/gadget=dar,lib/registry/handlers=jar,lib/synapse/mediator=jar
@@ -90,6 +91,26 @@
                         <projectnature>org.eclipse.jdt.core.javanature</projectnature>
                     </projectnatures>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.wso2.maven</groupId>
+                <artifactId>wso2-general-project-plugin</artifactId>
+                <version>2.1.0</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>registry</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>pom-gen</goal>
+                        </goals>
+                        <configuration>
+                            <artifactLocation>.</artifactLocation>
+                            <typeList>${r"${artifact.types}"}</typeList>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration />
             </plugin>
         </plugins>
     </build>

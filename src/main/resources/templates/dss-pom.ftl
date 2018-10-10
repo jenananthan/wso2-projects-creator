@@ -5,8 +5,9 @@
     <groupId>${pomObject.groupId}</groupId>
     <artifactId>${pomObject.artifactId}</artifactId>
     <version>${pomObject.version}</version>
-    <packaging>carbon/application</packaging>
+    <packaging>pom</packaging>
     <name>${pomObject.projectName}</name>
+    <description></description>
     <properties>
         <maven.test.skip>false</maven.test.skip>
         <CApp.type>
