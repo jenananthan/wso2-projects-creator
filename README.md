@@ -1,7 +1,8 @@
 # Build Status
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0c6c2820140242529fc8ca457049ae8f)](https://app.codacy.com/app/jenananthan/wso2-projects-creator?utm_source=github.com&utm_medium=referral&utm_content=jenananthan/wso2-projects-creator&utm_campaign=Badge_Grade_Dashboard)
 [![CircleCI](https://circleci.com/gh/jenananthan/wso2-projects-creator/tree/master.svg?style=shield)](https://circleci.com/gh/jenananthan/wso2-projects-creator/tree/master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0c6c2820140242529fc8ca457049ae8f)](https://app.codacy.com/app/jenananthan/wso2-projects-creator?utm_source=github.com&utm_medium=referral&utm_content=jenananthan/wso2-projects-creator&utm_campaign=Badge_Grade_Dashboard)
+
 
 # wso2-projects-creator
 
