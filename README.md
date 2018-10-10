@@ -6,8 +6,8 @@ project in a minute.
 This tool allows to create environment specific composite apps where environment specific configs
 e.g endpoints and test artifacts can be configured.
 
-Once project structure is created , it can be simply opened in wso2 developer studio (user option import as 
-existing wso2 projects in eclipse) and artifacts can be created as per the requirement.
+Once project structure is created , it can be simply opened in wso2 developer studio (Use the option **import** as 
+**Existing wso2 projects into work space** in eclipse) and artifacts can be created as per the requirement.
 
 **Please note that without any artifacts created maven build will fail for projects.**
 
