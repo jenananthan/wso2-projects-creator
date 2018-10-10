@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.jena.wso2.projects.constants.Constants;
 import org.jena.wso2.projects.dto.POM;
+
 import freemarker.template.TemplateException;
 
 public class ArtifactProject {
@@ -19,7 +20,7 @@ public class ArtifactProject {
     }
 
     void createParentDir() {
-        new File(projectName);
+        new File(projectName).mkdir();
     }
 
     void createPOMAndArtifactXML(String pomTemplate, String artifactTemplate) throws IOException, TemplateException {

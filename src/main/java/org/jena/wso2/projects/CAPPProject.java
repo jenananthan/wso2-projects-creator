@@ -7,14 +7,16 @@ import java.util.Map;
 
 import org.jena.wso2.projects.constants.Constants;
 import org.jena.wso2.projects.dto.POM;
+
 import freemarker.template.TemplateException;
 
-public class CAPPProject extends ArtifactProject {
+public class CAPPProject {
     private String projectName;
     private String groupId;
 
     public CAPPProject(String projectName, String groupId) {
-        super(projectName, groupId);
+        this.projectName = projectName;
+        this.groupId = groupId;
     }
 
     public void create() throws IOException, TemplateException {

@@ -30,7 +30,6 @@ public class TemplateGenerator {
 
     }
 
-
     public static void generate(Map<String, Object> input, String templateName, String outputFile) throws IOException, TemplateException {
         initialize();
         Template template = cfg.getTemplate(templateName);

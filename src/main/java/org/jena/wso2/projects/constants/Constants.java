@@ -28,4 +28,9 @@ public class Constants {
     public final static String ARTIFACT_XML = "artifact.xml";
     public final static String ARTIFACT_FTL = "artifact.ftl";
     public final static String TEMPLATES_DIR = "/templates";
+    public final static String SUFFIX_REG = "-reg";
+    public final static String SUFFIX_ESB = "-esb";
+    public final static String SUFFIX_DSS = "-dss";
+    public final static String SUFFIX_CONFIG = "-config-";
+    public final static String SUFFIX_TEMP = "-temp";
 }
