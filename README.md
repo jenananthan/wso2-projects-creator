@@ -1,4 +1,5 @@
 #Build Status
+
 [![CircleCI](https://circleci.com/gh/jenananthan/wso2-projects-creator/tree/master.svg?style=svg)](https://circleci.com/gh/jenananthan/wso2-projects-creator/tree/master)
 
 # wso2-projects-creator
