@@ -1,46 +1,110 @@
 package org.jena.wso2.projects;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.diogonunes.jcdp.bw.Printer;
+import com.diogonunes.jcdp.color.ColoredPrinter;
+import com.diogonunes.jcdp.color.api.Ansi;
 import org.jena.wso2.projects.constants.Constants;
 
 import freemarker.template.TemplateException;
+import org.jena.wso2.projects.util.CommandLineUtil;
 
 public class Main {
+
     public static void main(String[] args) throws IOException, TemplateException {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter project name. e.g invoice-sync");
-        String projectName = scanner.next();
-        System.out.println("Enter environments with comma separated values. e.g dev,aat,sit");
-        String[] environments = scanner.next().split(",");
-        System.out.println("Enter group id. e.g org.test.sales");
-        String groupId = scanner.next();
-        System.out.println("Do you want to create ESB project. Y/N");
-        String createESBProject = scanner.next();
-        System.out.println("Do you want to create Registry project. Y/N");
-        String createRegProject = scanner.next();
+        CommandLineUtil commandLineUtil = CommandLineUtil.getInstance();
+
+        commandLineUtil.printline(Ansi.FColor.GREEN);
+        commandLineUtil.println(Ansi.FColor.GREEN, " W S O 2  P R O J E C T  C R E A T O R");
+        commandLineUtil.printline(Ansi.FColor.GREEN);
+
+        String projectName = commandLineUtil
+                .newTerminalScan()
+                .withMessage("Enter project name (e.g invoice-sync): ")
+                .withPattern("[a-z-]*")
+                .withErrorMessage("ERROR: Project names should be in hyphen case (e.g invoice-sync)")
+                .scan();
+
+        String[] environments = commandLineUtil
+                .newTerminalScan()
+                .withMessage("Enter environments with comma separated values (e.g dev,aat,sit): ")
+                .withPattern("[a-z,]*")
+                .withErrorMessage("ERROR: Environment names should be in comma-separated lowercase")
+                .scan()
+                .split(",");
+
+        String groupId = commandLineUtil
+                .newTerminalScan()
+                .withMessage("Enter group id (e.g org.test.sales): ")
+                .withPattern("[a-z.]*")
+                .withErrorMessage("ERROR: Project group id should be in lowercase (e.g org.test.sales)")
+                .scan();
+
+        String createESBProject = commandLineUtil
+                .newTerminalScan()
+                .withMessage("Do you want to create ESB project (Y/n): ")
+                .withPattern("[ynYN]")
+                .withErrorMessage("ERROR: Invalid answer, please answer Y-yes or N-no")
+                .withDefaultValue("Y")
+                .scan();
+
+        String createRegProject = commandLineUtil
+                .newTerminalScan()
+                .withMessage("Do you want to create Registry project (Y/n): ")
+                .withPattern("[ynYN]")
+                .withErrorMessage("ERROR: Invalid answer, please answer Y-yes or N-no")
+                .withDefaultValue("Y")
+                .scan();
+
         String[] customDirs = null;
-        if ("y".equalsIgnoreCase(createRegProject)) {
-            System.out.println("Do you want to create custom directories in Registry projects. Y/N");
-            if ("y".equalsIgnoreCase(scanner.next())) {
-                System.out.println("Enter custom directory paths. e.g xslt, xsd, endpoints/dev, endpoints/sit");
-                customDirs = scanner.next().split(",");
+        if ("Y".equalsIgnoreCase(createRegProject)) {
+            String createRegCustomDir = commandLineUtil
+                    .newTerminalScan()
+                    .withMessage("Do you want to create custom directories in the Registry projects (Y/n): ")
+                    .withPattern("[ynYN]")
+                    .withErrorMessage("ERROR: Invalid answer, please answer Y-yes or N-no")
+                    .withDefaultValue("Y")
+                    .scan();
+
+            if ("Y".equalsIgnoreCase(createRegCustomDir)) {
+                customDirs = commandLineUtil
+                        .newTerminalScan()
+                        .withMessage("Enter custom directory paths (e.g xslt, xsd, endpoints/dev, endpoints/sit): ")
+                        .withPattern("[a-z,\\/]*")
+                        .withErrorMessage("ERROR: Custom directory paths should be in comma-separated lowercase")
+                        .scan()
+                        .split(",");
             }
         }
-        System.out.println("Do you want to create DSS project. Y/N");
-        String createDSSProject = scanner.next();
+
+        String createDSSProject = commandLineUtil
+                .newTerminalScan()
+                .withMessage("Do you want to create DSS project (Y/n): ")
+                .withPattern("[ynYN]")
+                .withErrorMessage("ERROR: Invalid answer, please answer Y-yes or N-no")
+                .withDefaultValue("Y")
+                .scan();
+
 
         String targetProjectName = "";
-        List<String> modules = new ArrayList<String>();
+        List<String> modules = new ArrayList<>();
+
+        commandLineUtil.printline(Ansi.FColor.GREEN);
+        commandLineUtil.println(Ansi.FColor.GREEN, "GENERATING WSO2 PROJECT(S)");
+        commandLineUtil.printline(Ansi.FColor.GREEN);
 
         //Create REG project
         if ("y".equalsIgnoreCase(createRegProject)) {
             targetProjectName = projectName + Constants.SUFFIX_REG;
             modules.add(targetProjectName);
-            System.out.println("Generating project :" + targetProjectName);
+
+            commandLineUtil.println(Ansi.FColor.GREEN, "Generating project :" + targetProjectName);
+
             RegistryProject registryProject = new RegistryProject(targetProjectName, groupId);
             registryProject.create(customDirs);
         }
@@ -49,7 +113,9 @@ public class Main {
         if ("y".equalsIgnoreCase(createESBProject)) {
             targetProjectName = projectName + Constants.SUFFIX_ESB;
             modules.add(targetProjectName);
-            System.out.println("Generating project :" + targetProjectName);
+
+            commandLineUtil.println(Ansi.FColor.GREEN, "Generating project :" + targetProjectName);
+
             ESBProject esbProject = new ESBProject(targetProjectName, groupId);
             esbProject.create();
         }
@@ -58,7 +124,9 @@ public class Main {
         if ("y".equalsIgnoreCase(createDSSProject)) {
             targetProjectName = projectName + Constants.SUFFIX_DSS;
             modules.add(targetProjectName);
-            System.out.println("Generating project :" + targetProjectName);
+
+            commandLineUtil.println(Ansi.FColor.GREEN, "Generating project :" + targetProjectName);
+
             DSSProject dssProject = new DSSProject(targetProjectName, groupId);
             dssProject.create();
         }
@@ -66,15 +134,19 @@ public class Main {
         //Create common CAPP project
         targetProjectName = projectName;
         modules.add(targetProjectName);
-        System.out.println("Generating project :" + targetProjectName);
+
+        commandLineUtil.println(Ansi.FColor.GREEN, "Generating project :" + targetProjectName);
+
         CAPPProject cappProject = new CAPPProject(targetProjectName, groupId);
         cappProject.create();
 
         //Create CAAP Projects for envs
         for (String env : environments) {
-            targetProjectName = projectName +  Constants.SUFFIX_CONFIG + env.toLowerCase();
+            targetProjectName = projectName + Constants.SUFFIX_CONFIG + env.toLowerCase();
             modules.add(targetProjectName);
-            System.out.println("Generating project :" + targetProjectName);
+
+            commandLineUtil.println(Ansi.FColor.GREEN, "Generating project :" + targetProjectName);
+
             CAPPProject cappEnvProject = new CAPPProject(targetProjectName, groupId);
             cappEnvProject.create();
         }

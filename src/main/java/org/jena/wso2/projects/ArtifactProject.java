@@ -5,14 +5,18 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.diogonunes.jcdp.color.api.Ansi;
 import org.jena.wso2.projects.constants.Constants;
 import org.jena.wso2.projects.dto.POM;
 
 import freemarker.template.TemplateException;
+import org.jena.wso2.projects.util.CommandLineUtil;
 
 public class ArtifactProject {
     private String projectName;
     private String groupId;
+
+    private final CommandLineUtil commandLineUtil = CommandLineUtil.getInstance();
 
     ArtifactProject(String projectName, String groupId) {
         this.projectName = projectName;
@@ -39,7 +43,7 @@ public class ArtifactProject {
     protected void createDirectoryStructure(String[] dirs) {
         if (dirs != null) {
             for (String dir : dirs) {
-                System.out.println("Reg custom dir : " + dir);
+                commandLineUtil.println(Ansi.FColor.GREEN, "\tGenerating directory : " + dir);
                 new File(projectName + "/" + dir).mkdirs();
             }
         }

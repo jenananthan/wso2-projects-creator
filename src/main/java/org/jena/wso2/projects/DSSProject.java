@@ -19,7 +19,7 @@ public class DSSProject extends ArtifactProject {
     }
 
     private void createDirectoryStructure() {
-        String[] dirs = { Constants.DSS__DIR };
+        String[] dirs = {Constants.DSS__DIR};
         createDirectoryStructure(dirs);
     }
 }
