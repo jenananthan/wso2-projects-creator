@@ -1,28 +1,22 @@
 package org.jena.wso2.projects;
 
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-import com.diogonunes.jcdp.bw.Printer;
-import com.diogonunes.jcdp.color.ColoredPrinter;
 import com.diogonunes.jcdp.color.api.Ansi;
-import org.jena.wso2.projects.constants.Constants;
-
-import freemarker.template.TemplateException;
+import org.jena.wso2.projects.dto.ProjectMetadata;
+import org.jena.wso2.projects.project.ProjectGenerator;
 import org.jena.wso2.projects.util.CommandLineUtil;
+
+import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, TemplateException {
+    public static void main(String[] args) throws IOException {
         CommandLineUtil commandLineUtil = CommandLineUtil.getInstance();
 
         commandLineUtil.printline(Ansi.FColor.GREEN);
         commandLineUtil.println(Ansi.FColor.GREEN, " W S O 2  P R O J E C T  C R E A T O R");
         commandLineUtil.printline(Ansi.FColor.GREEN);
 
+        //project metadata questionnaire
         String projectName = commandLineUtil
                 .newTerminalScan()
                 .withMessage("Enter project name (e.g invoice-sync): ")
@@ -91,68 +85,20 @@ public class Main {
                 .scan();
 
 
-        String targetProjectName = "";
-        List<String> modules = new ArrayList<>();
-
         commandLineUtil.printline(Ansi.FColor.GREEN);
         commandLineUtil.println(Ansi.FColor.GREEN, "GENERATING WSO2 PROJECT(S)");
         commandLineUtil.printline(Ansi.FColor.GREEN);
 
-        //Create REG project
-        if ("y".equalsIgnoreCase(createRegProject)) {
-            targetProjectName = projectName + Constants.SUFFIX_REG;
-            modules.add(targetProjectName);
+        //Generate the project
+        ProjectMetadata projectMetadata = new ProjectMetadata();
+        projectMetadata.setProjectName(projectName);
+        projectMetadata.setGroupId(groupId);
+        projectMetadata.setIncludeDssProject(createDSSProject.equalsIgnoreCase("Y"));
+        projectMetadata.setIncludeEsbProject(createESBProject.equalsIgnoreCase("Y"));
+        projectMetadata.setIncludeRegistryProject(createRegProject.equalsIgnoreCase("Y"));
+        projectMetadata.setEnvironments(environments);
+        projectMetadata.setRegistryCustomDirs(customDirs);
 
-            commandLineUtil.println(Ansi.FColor.GREEN, "Generating project :" + targetProjectName);
-
-            RegistryProject registryProject = new RegistryProject(targetProjectName, groupId);
-            registryProject.create(customDirs);
-        }
-
-        //Create ESB Project
-        if ("y".equalsIgnoreCase(createESBProject)) {
-            targetProjectName = projectName + Constants.SUFFIX_ESB;
-            modules.add(targetProjectName);
-
-            commandLineUtil.println(Ansi.FColor.GREEN, "Generating project :" + targetProjectName);
-
-            ESBProject esbProject = new ESBProject(targetProjectName, groupId);
-            esbProject.create();
-        }
-
-        //Create DSS project
-        if ("y".equalsIgnoreCase(createDSSProject)) {
-            targetProjectName = projectName + Constants.SUFFIX_DSS;
-            modules.add(targetProjectName);
-
-            commandLineUtil.println(Ansi.FColor.GREEN, "Generating project :" + targetProjectName);
-
-            DSSProject dssProject = new DSSProject(targetProjectName, groupId);
-            dssProject.create();
-        }
-
-        //Create common CAPP project
-        targetProjectName = projectName;
-        modules.add(targetProjectName);
-
-        commandLineUtil.println(Ansi.FColor.GREEN, "Generating project :" + targetProjectName);
-
-        CAPPProject cappProject = new CAPPProject(targetProjectName, groupId);
-        cappProject.create();
-
-        //Create CAAP Projects for envs
-        for (String env : environments) {
-            targetProjectName = projectName + Constants.SUFFIX_CONFIG + env.toLowerCase();
-            modules.add(targetProjectName);
-
-            commandLineUtil.println(Ansi.FColor.GREEN, "Generating project :" + targetProjectName);
-
-            CAPPProject cappEnvProject = new CAPPProject(targetProjectName, groupId);
-            cappEnvProject.create();
-        }
-        //Create Parent project
-        RootProject rootProject = new RootProject(projectName, groupId, modules);
-        rootProject.create();
-
+        new ProjectGenerator(projectMetadata).generate();
     }
 }
