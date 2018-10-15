@@ -34,7 +34,9 @@ jobs:
           command: |
             echo Building the project
             mvn clean install
-            ls target
+            mkdir distribution
+            cp target/wso2-projects-creator-tool.jar distribution
+            ls distribution
             
       - save_cache:
           paths:
