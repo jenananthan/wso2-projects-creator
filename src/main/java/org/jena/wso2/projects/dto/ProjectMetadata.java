@@ -12,9 +12,6 @@ public class ProjectMetadata {
     private String[] environments;
     private String[] registryCustomDirs;
 
-    public ProjectMetadata() {
-    }
-
     public String getProjectName() {
         return projectName;
     }
