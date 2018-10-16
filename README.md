@@ -21,7 +21,7 @@ Once project structure is created , it can be simply opened in wso2 developer st
 # How to use
 
 
-1. Download the jar **wso2-projects-creator-tool.jar** (https://github.com/jenananthan/wso2-projects-creator/blob/master/distribution/wso2-projects-creator-tool.jar)
+1. Download the jar **wso2-projects-creator-tool.jar**  from releases(https://github.com/jenananthan/wso2-projects-creator/releases)
 2. Place the jar where you want to create the project and execute the command
 
 
