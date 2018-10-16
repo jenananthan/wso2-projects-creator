@@ -18,28 +18,18 @@ Once project structure is created , it can be simply opened in wso2 developer st
 **Please note that without any artifacts created maven build will fail for projects.**
 
 
-# Development Guide
-###### Prerequisites
-* Java 1.8
-* Maven  
-
-Build the project
-```sh
-mvn clean install
-```
-
 # How to use
 
-1. Build the project
-2. Navigate to the target/ directory and get the jar **wso2-projects-creator-tool.jar**
-3. Place the jar where you want to create the project and execute the command
+
+1. Download the jar **wso2-projects-creator-tool.jar** (https://github.com/jenananthan/wso2-projects-creator/blob/master/distribution/wso2-projects-creator-tool.jar)
+2. Place the jar where you want to create the project and execute the command
 
 
 ```sh
 java -jar wso2-projects-creator-tool.jar 
 ```
 
-4. Give the answers to the questions prompted by the tool
+3. Give the answers to the questions prompted by the tool
 
     **Enter project name. e.g invoice-sync**
     
@@ -74,7 +64,7 @@ java -jar wso2-projects-creator-tool.jar
         y
     
 
-5. Project structure will be created with given information
+4. Project structure will be created with given information
 
 ```sh
 invoice-sync/
@@ -124,4 +114,14 @@ invoice-sync/
     └── .project
 
 
+```
+
+# Development Guide
+###### Prerequisites
+* Java 1.8
+* Maven  
+
+Build the project
+```sh
+mvn clean install
 ```
