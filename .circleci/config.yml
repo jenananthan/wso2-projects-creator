@@ -6,49 +6,48 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
-      - image: circleci/openjdk:8-jdk
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
+    # specify the version you desire here
+    - image: circleci/openjdk:8-jdk
+
+    # Specify service dependencies here if necessary
+    # CircleCI maintains a library of pre-built images
+    # documented at https://circleci.com/docs/2.0/circleci-images/
+    # - image: circleci/postgres:9.4
 
     working_directory: ~/repo
 
     environment:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
-    
+
     steps:
-      - checkout
+    - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "pom.xml" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+    # Download and cache dependencies
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "pom.xml" }}
+        # fallback to using the latest cache if no exact match is found
+        - v1-dependencies-
 
-      - run: 
-          command: |
-            echo Building the project
-            mvn clean install
-         
-            cp target/wso2-projects-creator-tool.jar distribution
-            ls distribution
-            git config credential.helper 'cache --timeout=120'
-            git config user.email "y.jena1@yahoo.com"
-            git config user.name "CircleCI"
-            git add distribution/wso2-projects-creator-tool.jar
-            git commit --allow-empty -m "[skip ci] Update distribution"
-            # Push quietly to prevent showing the token in log
-            git push -q https://${GITHUB_PERSONAL_TOKEN}@github.com/jenananthan/wso2-projects-creator.git
-            
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
-        
-      # run tests!
-   
+    - run:
+        name: Build the project
+        command: mvn clean install
+
+    - run:
+        name: Download and Install GitHub Release Tool (ghr)
+        command: |
+          wget -c https://github.com/tcnksm/ghr/releases/download/v0.12.0/ghr_v0.12.0_linux_amd64.tar.gz
+          tar -xvzf ghr_v0.12.0_linux_amd64.tar.gz
+          
+    - run:
+        name: Release to Github
+        command: |
+          VERSION=build-${CIRCLE_BUILD_NUM}
+          ./ghr_v0.12.0_linux_amd64/ghr -t ${GITHUB_PERSONAL_TOKEN} -u jenananthan -r wso2-projects-creator -c ${CIRCLE_SHA1} -delete ${VERSION} ./target/wso2-projects-creator-tool.jar
+
+    - save_cache:
+        paths:
+        - ~/.m2
+        key: v1-dependencies-{{ checksum "pom.xml" }}
+
