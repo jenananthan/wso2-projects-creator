@@ -115,6 +115,7 @@ invoice-sync/
 
 
 ```
+5. Open the project using the option **import** as **Existing wso2 projects into work space** in eclipse/developer studio
 
 # Development Guide
 ###### Prerequisites
