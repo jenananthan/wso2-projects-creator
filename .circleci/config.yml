@@ -55,8 +55,14 @@ jobs:
 workflows:
   version: 2
   build_and_release:
-    jobs:
-      - build:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
           filters:
             branches:
-              only: master
+              only:
+                - master
+                
+    jobs:
+      - build
+          
