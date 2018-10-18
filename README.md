@@ -17,6 +17,11 @@ Once project structure is created , it can be simply opened in wso2 developer st
 
 **Please note that without any artifacts created maven build will fail for projects.**
 
+## Demo
+
+This demo creates GitHub Release page with `v1.0.0` tag and uploads cross-compiled golang binaries.
+
+![](doc/wso2tool.gif)
 
 # How to use
 
