@@ -33,4 +33,5 @@ public class Constants {
     public final static String SUFFIX_DSS = "-dss";
     public final static String SUFFIX_CONFIG = "-config-";
     public final static String SUFFIX_TEMP = "-temp";
+    public final static String SUFFIX_CAPP = "-capp";
 }

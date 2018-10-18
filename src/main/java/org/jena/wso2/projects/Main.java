@@ -132,7 +132,7 @@ public class Main {
         }
 
         //Create common CAPP project
-        targetProjectName = projectName;
+        targetProjectName = projectName + Constants.SUFFIX_CAPP;
         modules.add(targetProjectName);
 
         commandLineUtil.println(Ansi.FColor.GREEN, "Generating project :" + targetProjectName);
