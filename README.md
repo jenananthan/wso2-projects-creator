@@ -31,7 +31,7 @@ java -jar wso2-projects-creator-tool.jar
 
 3. Give the answers to the questions prompted by the tool
 
-    **Enter project name. e.g invoice-sync**
+    **Enter project name.  e.g invoice-sync**
     
         invoice-sync
     
